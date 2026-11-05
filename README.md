@@ -1,10 +1,18 @@
 # AppLauncher (iPhone)
 
-A simple SwiftUI iPhone app that works like a home-screen launcher:
+A SwiftUI iPhone app with a **TV-style home screen**:
 
-- A big **Open the App Store** button.
-- A grid of app tiles. Tap a tile to **open that app** if it's installed; if it
+- Dark background, a top bar with the time, and a big **featured banner** that
+  rotates through your streaming apps.
+- **Rows of wide app cards** (TV & Casting, Streaming, Music, Social, Tools)
+  that scroll sideways, with a grow-and-glow effect when pressed.
+- A **Get more apps** card that opens the App Store.
+- Every card Tap a tile to **open that app** if it's installed; if it
   isn't, it **opens that app's App Store page** so you can download it.
+
+> This is an original TV-style look built for the iPhone. It doesn't copy the
+> real interface from any TV stick: that software is locked to the stick's
+> hardware and can't be downloaded or installed on an iPhone.
 
 > **Note on the Samsung TV:** an iPhone app can't reboot, reset, or re-flash a
 > Samsung TV — iOS apps are sandboxed and TVs don't accept that kind of command
@@ -34,11 +42,13 @@ Edit `AppLauncher/AppCatalog.swift`. Each tile is one `LaunchApp`:
 
 ```swift
 LaunchApp(name: "YouTube", scheme: "youtube://", appStoreID: "544007664",
-          symbol: "play.rectangle.fill", color: .red)
+          symbol: "play.rectangle.fill", color: .red, category: .streaming)
 ```
 
 - `scheme` — the app's URL scheme (opens it if installed).
 - `appStoreID` — the numeric App Store id (used as the download fallback).
+- `category` — which row it appears in (`.tv`, `.streaming`, `.music`,
+  `.social`, `.tools`).
 - `symbol` — any [SF Symbol](https://developer.apple.com/sf-symbols/) name.
 
 If you add a new app, also add its scheme (without `://`) to
@@ -50,6 +60,6 @@ report whether it's installed.
 | File | Purpose |
 |------|---------|
 | `AppLauncherApp.swift` | App entry point |
-| `ContentView.swift` | The grid UI + App Store button |
+| `ContentView.swift` | The TV-style home screen (banner, rows, cards) |
 | `AppCatalog.swift` | The editable list of apps |
 | `Info.plist` | App config + allowed URL schemes |
